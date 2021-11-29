@@ -3,7 +3,7 @@
 Easy HiHaHo REST API client. 
 
 Not all endpoints are currently implemented, feel free to add them or create an issue when you need help implementing 
-the endpoint.
+the endpoint. It's also possible to make custom requests with the client.
 
 ## Requirements
 
@@ -56,6 +56,30 @@ This package will automatically retrieve the access token, so you won't have to 
 store the access/refresh token anyway, you can access it in the `Configuration` class with: 
 `$configuration->getAccessToken()` or `$configuration->getRefreshToken()`. 
 
+### Custom requests
+
+When an endpoint isn't implemented yet, or for whatever other reason, it's possible to make manual request with the 
+client. You can even use your own request classes as long as they implement the `Request` contract.
+
+For example, a little put request to the API:
+
+```php
+$request = (new Request())
+    ->setMethod(Request::METHOD_PUT)
+    ->setUrl('v2/video/12345')
+    ->setBody(['status' => 0]);
+$response = $client->perform($request);
+```
+
+By default, the request wants to make an authenticated request, but you can disable that in the request itself:
+
+```php
+$request->setAuthenticationRequired(false);
+```
+
+When enabled the client checks if an access token is present and will attempt to retrieve the access token when the 
+token is not yet available.
+
 ### Handling errors
 
 When an error occurs, a `Response` object is still returned. The error might be provided by HiHaHo or from the 
@@ -69,8 +93,8 @@ if (!$response->isSuccess()) {
 
 ### Laravel
 
-This package can be easily used in any Laravel application. I would suggest adding your username and password to your
-`.env` file:
+This package can be easily used in any Laravel application. I would suggest adding your credentials to the `.env` file 
+of the project:
 
 ```
 HIHAHO_URL=url
