@@ -3,11 +3,11 @@
 Easy HiHaHo REST API client. 
 
 Not all endpoints are currently implemented, feel free to add them or create an issue when you need help implementing 
-the endpoint. It's also possible to make custom requests with the client.
+the endpoint. It's also possible to extend the client.
 
 ## Requirements
 
-This package requires at least PHP 7.4 and uses Guzzle.
+This package requires at least PHP 7.4.
 
 ## Installation
 
@@ -26,68 +26,53 @@ This package is just an easy client for using the HiHaHo API. Please refer to th
 
 ```php
 // Initialize the configuration
-$configuration = new \Vdhicts\HiHaHo\Configuration();
+$configuration = new \Vdhicts\HiHaHo\Configuration(
+    ..
+);
 
-// Initialize the client
-$client = new \Vdhicts\HiHaHo\Client($configuration);
+// Initialize the API
+$api = new \Vdhicts\HiHaHo\HiHaHo($configuration);
 
-// Get the videos
-$response = (new \Vdhicts\HiHaHo\HiHaHoApi($client))
-    ->video()
-    ->all();
+// Get all videos
+$response = $api->allVideos();
 
-if ($response->isSuccess()) {
-    $response->getData('data');
+if ($response->ok()) {
+    $response->object()->data;
 }
-```
-
-The `getData` method is able to use the dot notation. For example:
-
-```php
-$response = (new \Vdhicts\HiHaHo\HiHaHoApi($client))
-    ->video()
-    ->get(12345);
-$response->getData('data.embed_url');
 ```
 
 ### Authentication
 
 This package will automatically retrieve the access token, so you won't have to store the access token. If you want to 
 store the access/refresh token anyway, you can access it in the `Configuration` class with: 
-`$configuration->getAccessToken()` or `$configuration->getRefreshToken()`. 
+`$configuration->getAccessToken()` or `$configuration->getRefreshToken()`.
 
-### Custom requests
+### Extending the client
 
-When an endpoint isn't implemented yet, or for whatever other reason, it's possible to make manual request with the 
-client. You can even use your own request classes as long as they implement the `Request` contract.
-
-For example, a little put request to the API:
+You can extend the client and implement your own endpoints:
 
 ```php
-$request = (new Request())
-    ->setMethod(Request::METHOD_PUT)
-    ->setUrl('v2/video/12345')
-    ->setBody(['status' => 0]);
-$response = $client->perform($request);
+class Video extends HiHaHo 
+{
+    public function updateVideo(int $videoId): Response
+    {
+        return $this
+            ->withToken($this->getAccessToken())
+            ->put(sprintf('v2/video/%d', $videoId), [
+                'status' => 0,
+            ]);
+    }    
+}
 ```
-
-By default, the request wants to make an authenticated request, but you can disable that in the request itself:
-
-```php
-$request->setAuthenticationRequired(false);
-```
-
-When enabled the client checks if an access token is present and will attempt to retrieve the access token when the 
-token is not yet available.
 
 ### Handling errors
 
-When an error occurs, a `Response` object is still returned. The error might be provided by HiHaHo or from the 
-client but will always be accessible with the `getError` method.
+A `Response` object will always be returned. See 
+[Error handling](https://laravel.com/docs/8.x/http-client#error-handling) of the Http Client.
 
 ```php
-if (!$response->isSuccess()) {
-    var_dump($response->getError());
+if ($response->failed()) {
+    var_dump($response->serverError());
 }
 ```
 

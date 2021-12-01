@@ -4,7 +4,7 @@ namespace Vdhicts\HiHaHo;
 
 class Configuration
 {
-    private string $url = 'https://api.hihaho.com';
+    private string $url = 'https://api.hihaho.com/';
     private string $clientId;
     private string $clientSecret;
     private string $username;

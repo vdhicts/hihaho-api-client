@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Please note this changelog affects this package and not the 
 HiHaHo API.
 
+## [2.0.0]
+
+### Changed
+
+- Switch to using the HTTP Client of Laravel. All endpoints will now return the `Illuminate\Http\Client\Response`.
+
 ## [1.0.0]
 
 ### Added
