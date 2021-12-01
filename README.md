@@ -37,7 +37,7 @@ $api = new \Vdhicts\HiHaHo\HiHaHo($configuration);
 $response = $api->allVideos();
 
 if ($response->ok()) {
-    $response->object()->data;
+    $response->json('data');
 }
 ```
 

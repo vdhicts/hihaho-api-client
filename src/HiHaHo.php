@@ -3,6 +3,7 @@
 namespace Vdhicts\HiHaHo;
 
 use Illuminate\Http\Client\Factory;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Vdhicts\HiHaHo\Endpoints\VideoContainerEndpoint;
 use Vdhicts\HiHaHo\Endpoints\VideoEndpoint;
@@ -24,15 +25,6 @@ class HiHaHo extends Factory
         parent::__construct();
 
         $this->configuration = $configuration;
-
-        $this->defaultOptions = [
-            'base_uri' => $this->configuration->getUrl(),
-            'timeout' => self::TIMEOUT,
-            'headers' => [
-                'User-Agent' => self::USER_AGENT,
-                'Accept' => 'application/json',
-            ],
-        ];
     }
 
     private function login(): Response
@@ -78,17 +70,13 @@ class HiHaHo extends Factory
             ->getAccessToken();
     }
 
-    public function __call($method, $parameters)
+    protected function newPendingRequest(): PendingRequest
     {
-        if (static::hasMacro($method)) {
-            return $this->macroCall($method, $parameters);
-        }
-
-        // Override this to include the default options
-        return tap($this->newPendingRequest(), function ($request) {
-            $request
-                ->withOptions($this->defaultOptions)
-                ->stub($this->stubCallbacks);
-        })->{$method}(...$parameters);
+        return parent::newPendingRequest()
+            ->acceptJson()
+            ->asJson()
+            ->baseUrl($this->configuration->getUrl())
+            ->timeout(self::TIMEOUT)
+            ->withUserAgent(self::USER_AGENT);
     }
 }
