@@ -82,7 +82,6 @@ This package can be easily used in any Laravel application. I would suggest addi
 of the project:
 
 ```
-HIHAHO_URL=url
 HIHAHO_CLIENT_ID=clientid
 HIHAHO_CLIENT_SECRET=secret
 HIHAHO_USERNAME=username
@@ -95,7 +94,6 @@ Next create a config file `hihaho.php` in `/config`:
 <?php
 
 return [
-    'url' => env('HIHAHO_URL'),
     'client_id' => env('HIHAHO_CLIENT_ID'),
     'client_secret' => env('HIHAHO_CLIENT_SECRET'),
     'username' => env('HIHAHO_USERNAME'),
@@ -107,7 +105,6 @@ And use those files to build the configuration:
 
 ```php
 $configuration = new Configuration(
-    config('hihaho.url'),
     config('hihaho.client_id'),
     config('hihaho.client_secret'),
     config('hihaho.username'),
