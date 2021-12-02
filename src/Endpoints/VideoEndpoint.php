@@ -6,18 +6,18 @@ use Illuminate\Http\Client\Response;
 
 trait VideoEndpoint
 {
-    public function allVideos(): Response
+    public function allVideos(int $page = 1): Response
     {
         return $this
             ->withToken($this->getAccessToken())
-            ->get('v2/video');
+            ->get('v2/video?page=' . $page);
     }
 
-    public function searchVideos(string $search): Response
+    public function searchVideos(string $search, int $page = 1): Response
     {
         return $this
             ->withToken($this->getAccessToken())
-            ->get('v2/video', ['q' => $search]);
+            ->get('v2/video', ['q' => $search, 'page' => $page]);
     }
 
     public function getVideo(int $videoId): Response
