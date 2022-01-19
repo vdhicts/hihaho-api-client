@@ -18,7 +18,6 @@ class HiHaHo extends Factory
     private const USER_AGENT = 'vdhicts-hihaho-api-client/' . self::VERSION;
 
     protected Configuration $configuration;
-    protected array $defaultOptions = [];
 
     public function __construct(Configuration $configuration)
     {
