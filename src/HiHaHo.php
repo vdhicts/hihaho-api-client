@@ -14,7 +14,7 @@ class HiHaHo extends Factory
     use VideoContainerEndpoint;
 
     private const TIMEOUT = 180;
-    private const VERSION = '2.1.0';
+    private const VERSION = '3.0.0';
     private const USER_AGENT = 'vdhicts-hihaho-api-client/' . self::VERSION;
 
     protected Configuration $configuration;
