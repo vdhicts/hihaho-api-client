@@ -14,7 +14,7 @@ class HiHaHo extends Factory
     use VideoContainerEndpoint;
 
     private const TIMEOUT = 180;
-    private const VERSION = '3.0.0';
+    private const VERSION = '4.0.0';
     private const USER_AGENT = 'vdhicts-hihaho-api-client/' . self::VERSION;
 
     protected Configuration $configuration;
@@ -61,8 +61,8 @@ class HiHaHo extends Factory
 
         $this
             ->configuration
-            ->setAccessToken($response->object()->access_token)
-            ->setRefreshToken($response->object()->refresh_token);
+            ->setAccessToken($response->json('access_token'))
+            ->setRefreshToken($response->json('refresh_token'));
 
         return $this
             ->configuration
