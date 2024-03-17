@@ -10,7 +10,7 @@ trait VideoEndpoint
     {
         return $this
             ->withToken($this->getAccessToken())
-            ->get('v2/video?page=' . $page);
+            ->get('v2/video?page='.$page);
     }
 
     public function searchVideos(string $search, int $page = 1): Response

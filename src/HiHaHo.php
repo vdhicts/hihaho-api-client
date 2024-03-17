@@ -10,12 +10,14 @@ use Vdhicts\HiHaHo\Endpoints\VideoEndpoint;
 
 class HiHaHo extends Factory
 {
-    use VideoEndpoint;
     use VideoContainerEndpoint;
+    use VideoEndpoint;
 
     private const TIMEOUT = 180;
-    private const VERSION = '4.0.0';
-    private const USER_AGENT = 'vdhicts-hihaho-api-client/' . self::VERSION;
+
+    private const VERSION = '5.0.0';
+
+    private const USER_AGENT = 'vdhicts-hihaho-api-client/'.self::VERSION;
 
     protected Configuration $configuration;
 

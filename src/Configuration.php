@@ -5,11 +5,17 @@ namespace Vdhicts\HiHaHo;
 class Configuration
 {
     private string $url = 'https://api.hihaho.com/';
+
     private string $clientId;
+
     private string $clientSecret;
+
     private string $username;
+
     private string $password;
+
     private ?string $accessToken = null;
+
     private ?string $refreshToken = null;
 
     public function __construct(string $clientId, string $clientSecret, string $username, string $password)
@@ -59,7 +65,7 @@ class Configuration
 
     public function hasAccessToken(): bool
     {
-        return !is_null($this->accessToken);
+        return ! is_null($this->accessToken);
     }
 
     public function setAccessToken(?string $accessToken): self
@@ -76,7 +82,7 @@ class Configuration
 
     public function hasRefreshToken(): bool
     {
-        return !is_null($this->refreshToken);
+        return ! is_null($this->refreshToken);
     }
 
     public function setRefreshToken(?string $refreshToken): self
