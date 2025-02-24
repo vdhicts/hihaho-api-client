@@ -7,7 +7,7 @@ the endpoint. It's also possible to extend the client.
 
 ## Requirements
 
-This package requires at least PHP 7.4.
+This package requires at least PHP 8.2.
 
 ## Installation
 

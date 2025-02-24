@@ -8,7 +8,7 @@ use Vdhicts\HiHaHo\Configuration;
 
 class ConfigurationTest extends TestCase
 {
-    public function testInitialisation()
+    public function test_initialisation()
     {
         $clientId = 'ClientId';
         $clientSecret = 'ClientSecret';
@@ -25,7 +25,7 @@ class ConfigurationTest extends TestCase
         $this->assertFalse($configuration->hasRefreshToken());
     }
 
-    public function testProvidingTokens()
+    public function test_providing_tokens()
     {
         $configuration = new Configuration(
             'ClientId',
@@ -44,7 +44,7 @@ class ConfigurationTest extends TestCase
         $this->assertSame($refreshToken, $configuration->getRefreshToken());
     }
 
-    public function testProvidingUrl()
+    public function test_providing_url()
     {
         $configuration = new Configuration(
             'ClientId',
