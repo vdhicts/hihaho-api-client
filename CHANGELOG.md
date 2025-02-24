@@ -5,6 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Please note this changelog affects this package and not the 
 HiHaHo API.
 
+## [6.0.0]
+
+### Added
+
+- Add support for Laravel 12.
+- Add support for PHP 8.4.
+
+### Removed
+
+- Drop support for Laravel version older than 11.
+- Drop support for PHP versions older than 8.2.
+
 ## [5.0.0]
 
 ### Changed

@@ -10,7 +10,7 @@ use Vdhicts\HiHaHo\HiHaHo;
 
 class HiHaHoTest extends TestCase
 {
-    public function testRequest()
+    public function test_request()
     {
         $videoId = rand(1000, 9999);
         $accessToken = Str::random();
