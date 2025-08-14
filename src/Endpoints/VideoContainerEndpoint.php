@@ -10,6 +10,9 @@ trait VideoContainerEndpoint
     {
         return $this
             ->withToken($this->getAccessToken())
-            ->get(sprintf('v2/video-container/%d/upload-video', $videoId));
+            ->withUrlParameters([
+                'video_id' => $videoId,
+            ])
+            ->get('v2/video-container/{video_id}/upload-video');
     }
 }

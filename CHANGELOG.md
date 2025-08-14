@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Please note this changelog affects this package and not the 
 HiHaHo API.
 
+## [7.0.0]
+
+### Added
+
+- Add missing query parameters to the `allVideos()` and `searchVideos()` endpoints.
+- Add endpoint to retrieve subtitles for a video.
+
+### Changed
+
+- Use url parameters instead of manually building the URL.
+
 ## [6.0.0]
 
 ### Added
