@@ -15,7 +15,7 @@ class HiHaHo extends Factory
 
     private const TIMEOUT = 180;
 
-    private const VERSION = '7.0.0';
+    private const VERSION = '8.0.0';
 
     private const USER_AGENT = 'vdhicts-hihaho-api-client/'.self::VERSION;
 
